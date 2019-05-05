@@ -47,10 +47,3 @@
   .card-link:hover {
     opacity: 0.1;
   }
-
-  .logs-form {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 200px;
-  }

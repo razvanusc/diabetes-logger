@@ -11,12 +11,8 @@ class CreateEntry extends Component {
         units1: null,
         insulinType2: '',
         units2: null,
-        insulinTypes: [ 'Apidra', 'Humalog', 'Injectables', 'Insulin NPH', 'Lantus', 'Levemir', 'Novolog', 'Acarbose (Precose)', 'Actoplus Met',
-                    'Actos', 'Amaryl', 'Diabeta', 'Duetact', 'Fortamet', 'Glucophage', 'Glucophage XR', 'Gluctrol', 'Glucotrol XL',
-                    'Glucovance', 'Glumetza', 'Glynase', 'Glyset', 'Janumet', 'Kombiglyze', 'Metaglip', 'Metformin', 'Micronase',
-                    'Onglyza', 'Prandimet', 'Prandin', 'Riomet', 'Starlix', 'Tradjenata', 'Welchol'],
-        timeOfDay: ['Before Breakfast', 'After Breakfast', 'Before Lunch', 'After Lunch', 'Before Dinner', 'After Dinner',
-                    'Before Bedtime', 'Random']
+        insulinType3: '',
+        units3: ''
     }
 
     handleChange = (e) => {
@@ -31,7 +27,13 @@ class CreateEntry extends Component {
     }
 
     render() {
-        const { timeOfDay, insulinTypes } = this.state
+        const insulinTypes = [ 'Apidra', 'Humalog', 'Injectables', 'Insulin NPH', 'Lantus', 'Levemir', 'Novolog', 'Acarbose (Precose)', 'Actoplus Met',
+        'Actos', 'Amaryl', 'Diabeta', 'Duetact', 'Fortamet', 'Glucophage', 'Glucophage XR', 'Gluctrol', 'Glucotrol XL',
+        'Glucovance', 'Glumetza', 'Glynase', 'Glyset', 'Janumet', 'Kombiglyze', 'Metaglip', 'Metformin', 'Micronase',
+        'Onglyza', 'Prandimet', 'Prandin', 'Riomet', 'Starlix', 'Tradjenata', 'Welchol'];
+
+        const timeOfDay = ['Before Breakfast', 'After Breakfast', 'Before Lunch', 'After Lunch', 'Before Dinner', 'After Dinner',
+        'Before Bedtime', 'Random'];
 
         return (
             <div className="create-entry-div">
@@ -68,6 +70,17 @@ class CreateEntry extends Component {
                 
                     <label htmlFor="units2">Units</label>
                     <input type="input" id="units2" onChange={this.handleChange} placeholder="Units"></input>
+
+                    <label htmlFor="insulinType3">Medication 3</label>
+                    <select type="input" id="insulinType3" onChange={this.handleChange}>
+                        <option value="" disabled selected>Select the type of insulin</option>
+                        {insulinTypes.map((type, i) =>
+                            <option value={type} key={i}>{type}</option>
+                        )}
+                    </select>
+                
+                    <label htmlFor="units3">Units</label>
+                    <input type="input" id="units3" onChange={this.handleChange} placeholder="Units"></input>
 
                     <button type="submit">Submit</button>
                     </form>

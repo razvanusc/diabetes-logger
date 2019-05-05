@@ -1,18 +1,37 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
+import EntrySummary from './EntrySummary'
+
 
 const EntryDetails = (props) => {
-    const id = props.match.params.id;
-    return (
-        <div className="project-details">
-            <div className="card">
-                <div className="card-category">Popular - {id}</div>
-                <div className="card-description">
-                    <h2>Le Wagon Shanghai</h2>
-                    <p>Very cool city, the best</p>
-                </div>
+    const { entry } = props
+    if (entry) {
+        return (
+            <div className="entry-list">
+                <EntrySummary entry={entry}/>
             </div>
-        </div>
-  )
+        )
+    } else {
+        return (
+            <div><p>Loading entry...</p></div>
+        )
+    }
 }
 
-export default EntryDetails;
+const mapStateToProps = (state, ownParams) => {
+    const id = ownParams.match.params.id
+    const entries = state.firestore.data.entries;
+    const entry = entries ? entries[id] : null
+    return {
+        entry: entry
+    }
+}
+
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        { collection: 'entries' }
+    ])
+)(EntryDetails);

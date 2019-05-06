@@ -1,0 +1,11 @@
+.card-summary {
+    border: 1px black;
+    color: black;
+}
+
+.card-description-summary {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './CreateEntry.css';
-import { createEntry} from '../../store/actions/entryActions';
+import { createEntry} from '../../../store/actions/entryActions';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom'
 
 class CreateEntry extends Component {
     state = {
@@ -24,9 +25,13 @@ class CreateEntry extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.createEntry(this.state)
+        this.props.history.push('/')
     }
 
     render() {
+        const { auth } = this.props
+        if (!auth.uid) return <Redirect to='/signin' />
+
         const insulinTypes = [ 'Apidra', 'Humalog', 'Injectables', 'Insulin NPH', 'Lantus', 'Levemir', 'Novolog', 'Acarbose (Precose)', 'Actoplus Met',
         'Actos', 'Amaryl', 'Diabeta', 'Duetact', 'Fortamet', 'Glucophage', 'Glucophage XR', 'Gluctrol', 'Glucotrol XL',
         'Glucovance', 'Glumetza', 'Glynase', 'Glyset', 'Janumet', 'Kombiglyze', 'Metaglip', 'Metformin', 'Micronase',
@@ -89,10 +94,16 @@ class CreateEntry extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         createEntry: (entry) => dispatch(createEntry(entry))
     }
 }
 
-export default connect(null, mapDispatchToProps)(CreateEntry);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateEntry);

@@ -1,5 +1,5 @@
 import React from 'react';
-import EntrySummary from './EntrySummary';
+import EntrySummary from '../EntrySummary/EntrySummary';
 import { Link } from 'react-router-dom';
 
 const EntryList = ({entries}) => {

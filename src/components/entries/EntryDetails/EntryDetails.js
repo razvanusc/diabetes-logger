@@ -2,11 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import EntrySummary from './EntrySummary'
+import EntrySummary from '../EntrySummary/EntrySummary';
+import { Redirect } from 'react-router-dom';
 
 
 const EntryDetails = (props) => {
-    const { entry } = props
+    const { entry, auth } = props
+    if (!auth.uid) return <Redirect to='/signin' />
+
     if (entry) {
         return (
             <div className="entry-list">
@@ -25,7 +28,8 @@ const mapStateToProps = (state, ownParams) => {
     const entries = state.firestore.data.entries;
     const entry = entries ? entries[id] : null
     return {
-        entry: entry
+        entry: entry,
+        auth: state.firebase.auth
     }
 }
 

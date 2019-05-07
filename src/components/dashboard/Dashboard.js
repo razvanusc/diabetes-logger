@@ -3,7 +3,8 @@ import EntryList from '../entries/EntryList/EntryList'
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import './Dashboard.css'
 
 class Dashboard extends Component {
     render() {
@@ -11,7 +12,7 @@ class Dashboard extends Component {
         if (!auth.uid) return <Redirect to='/signin' />
 
         return (
-            <div className="container">
+            <div className="container-dashboard">
                 <div className="row">
                     <div className="col-xs-12 col-sm-12">
                         <EntryList entries={entries} />
@@ -31,7 +32,10 @@ const mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect([
-        { collection: 'entries' }
+    firestoreConnect(props => [
+        { 
+            collection: 'entries', 
+            where: [['creatorId', '==', props.auth.uid]]
+        }
     ])
 )(Dashboard);

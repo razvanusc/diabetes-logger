@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Navbar.css';
 import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
@@ -11,19 +10,12 @@ const Navbar = (props) => {
 
     return(
         <nav className="nav">
-            <div>
-                <Link to='/' className="nav-left">Diabetes Logger</Link>
-            </div>
-
-            <div className="nav-right">
-                { links }
-            </div>
+            { links }
         </nav>
     )
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         auth: state.firebase.auth
     }

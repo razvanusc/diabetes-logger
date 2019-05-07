@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { signIn } from '../../store/actions/authActions';
 import { Redirect } from 'react-router-dom';
+import './SignIn.css'
 
 
 class SignIn extends Component {
@@ -26,7 +27,7 @@ class SignIn extends Component {
         if (auth.uid) return <Redirect to='/' />
 
         return (
-            <div>
+            <div className='signin-form'>
                 <form onSubmit={this.handleSubmit} >
                     <h5>Sign In</h5>
                     <div>

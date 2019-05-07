@@ -52,7 +52,7 @@ class CreateEntry extends Component {
                       </select>
 
                     <label htmlFor="bloodSugar">Blood Sugar</label>
-                    <input type="input" id="bloodSugar" onChange={this.handleChange} placeholder="Blood sugar (mg/dl)" />
+                    <input type="input" id="bloodSugar" onChange={this.handleChange} placeholder="0" />
 
                     <label htmlFor="insulinType1">Medication 1</label>
                     <select type="input" id="insulinType1" onChange={this.handleChange}>
@@ -63,7 +63,7 @@ class CreateEntry extends Component {
                     </select>
 
                     <label htmlFor="units1">Units</label>
-                    <input type="input" id="units1" onChange={this.handleChange} placeholder="Units" />
+                    <input type="input" id="units1" onChange={this.handleChange} placeholder="0" />
 
                     <label htmlFor="insulinType2">Medication 2</label>
                     <select type="input" id="insulinType2" onChange={this.handleChange}>
@@ -74,7 +74,7 @@ class CreateEntry extends Component {
                     </select>
                 
                     <label htmlFor="units2">Units</label>
-                    <input type="input" id="units2" onChange={this.handleChange} placeholder="Units"></input>
+                    <input type="input" id="units2" onChange={this.handleChange} placeholder="0"></input>
 
                     <label htmlFor="insulinType3">Medication 3</label>
                     <select type="input" id="insulinType3" onChange={this.handleChange}>
@@ -85,7 +85,7 @@ class CreateEntry extends Component {
                     </select>
                 
                     <label htmlFor="units3">Units</label>
-                    <input type="input" id="units3" onChange={this.handleChange} placeholder="Units"></input>
+                    <input type="input" id="units3" onChange={this.handleChange} placeholder="0"></input>
 
                     <button type="submit">Submit</button>
                     </form>

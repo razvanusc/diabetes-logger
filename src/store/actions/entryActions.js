@@ -7,7 +7,6 @@ export const createEntry = (entry) => {
         firestore.collection('entries').add({
             ...entry,
             creatorId: creatorId,
-            createdAt: new Date(),
             unit: 'mg/dl'
         }).then(() => {
             dispatch({ type: 'CREATE_ENTRY', entry })
@@ -17,20 +16,28 @@ export const createEntry = (entry) => {
     }
 }
 
-export const updateEntry = (entry) => {
+export const updateEntry = (entry, uid) => {
     return (dispatch, getState, { getFirestore, getFirebase }) => {
         const firestore = getFirestore();
-        const creatorId = getState().firebase.auth.uid;
 
-        firestore.collection('entries').update({
-            ...entry,
-            creatorId: creatorId,
-            createdAt: new Date(),
-            unit: 'mg/dl'
+        firestore.collection('entries').doc(uid).update({
+            ...entry
         }).then(() => {
             dispatch({ type: 'UPDATE_ENTRY', entry })
         }).catch((err) => {
             dispatch({ type: 'UPDATE_ENTRY_ERROR', err })
+        })
+    }
+}
+
+export const removeEntry = (id) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firestore = getFirestore();
+
+        firestore.collection('entries').doc(id).delete().then(() => {
+            dispatch({ type: 'REMOVE_ENTRY', })
+        }).catch((err) => {
+            dispatch({ type: 'REMOVE_ENTRY_ERROR', err })
         })
     }
 }

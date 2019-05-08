@@ -4,17 +4,16 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import DatePicker from 'react-datepicker';
 
 class EntryDetails extends Component {
-    state = {
-        timeOfTheDay: '',
-        bloodSugar: null,
-        insulinType1: '',
-        units1: null,
-        insulinType2: '',
-        units2: null,
-        insulinType3: '',
-        units3: ''
+    state = {}
+
+    componentDidMount() {
+        const { entry } = this.props
+        this.setState({
+            ...entry
+        })
     }
 
     handleChange = (e) => {
@@ -23,14 +22,23 @@ class EntryDetails extends Component {
         })
     }
 
+    handleDate = (date) => {
+        console.log(date)
+        this.setState({
+            startDate: date
+        })
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.updateEntry(this.state)
+        const id = this.props.match.params.id
+        this.props.updateEntry(this.state, id)
         this.props.history.push('/')
     }
 
     render() {
         const { auth, entry } = this.props
+        console.log(entry)
         if (!auth.uid) return <Redirect to='/signin' />
         if (!entry) {
             return <div />
@@ -46,9 +54,9 @@ class EntryDetails extends Component {
 
         return (
             <div className="create-entry-div">
-                <form className='entry-form' onSubmit={this.handleSubmit}>
+                <form className='entry-form' onSubmit={this.handleSubmit} updateon="blur">
                     <label htmlFor="timeOfTheDay">Time of the day</label>
-                    <select value={entry.timeOfTheDay} type="text" id="timeOfTheDay" onChange={this.handleChange}>
+                    <select defaultValue={entry.timeOfTheDay} type="text" id="timeOfTheDay" onChange={this.handleChange}>
                          <option value="" disabled selected>Select the time of the day</option>
                          {timeOfDay.map((time, i) =>
                              <option value={time} key={i}>{time}</option>
@@ -56,10 +64,22 @@ class EntryDetails extends Component {
                       </select>
 
                     <label htmlFor="bloodSugar">Blood Sugar</label>
-                    <input value={entry.bloodSugar} type="input" id="bloodSugar" onChange={this.handleChange} placeholder="0" />
+                    <input defaultValue={entry.bloodSugar} type="input" id="bloodSugar" onChange={this.handleChange} placeholder="0" />
+
+                    <label htmlFor="dateAndTime">Date and Time</label>
+                    <DatePicker
+                        todayButton={"Today"}
+                        onChange={this.handleDate}
+                        showTimeSelect
+                        timeFormat="HH:mm"
+                        timeIntervals={15}
+                        dateFormat="MMMM d, yyyy h:mm aa"
+                        timeCaption="time"
+                        selected={entry.startDate.toDate()}
+                    />
 
                     <label htmlFor="insulinType1">Medication 1</label>
-                    <select value={entry.insulinType1} type="input" id="insulinType1" onChange={this.handleChange}>
+                    <select defaultValue={entry.insulinType1} type="input" id="insulinType1" onChange={this.handleChange}>
                         <option value="" disabled selected>Select the type of insulin</option>
                         {insulinTypes.map((type, i) =>
                             <option value={type} key={i}>{type}</option>
@@ -67,10 +87,10 @@ class EntryDetails extends Component {
                     </select>
 
                     <label htmlFor="units1">Units</label>
-                    <input value={entry.units1} type="input" id="units1" onChange={this.handleChange} placeholder="0" />
+                    <input defaultValue={entry.units1} type="input" id="units1" onChange={this.handleChange} placeholder="0" />
 
                     <label htmlFor="insulinType2">Medication 2</label>
-                    <select value={entry.insulinType2} type="input" id="insulinType2" onChange={this.handleChange}>
+                    <select defaultValue={entry.insulinType2} type="input" id="insulinType2" onChange={this.handleChange}>
                         <option value="" disabled selected>Select the type of insulin</option>
                         {insulinTypes.map((type, i) =>
                             <option value={type} key={i}>{type}</option>
@@ -78,10 +98,10 @@ class EntryDetails extends Component {
                     </select>
                 
                     <label htmlFor="units2">Units</label>
-                    <input value={entry.units2} type="input" id="units2" onChange={this.handleChange} placeholder="0"></input>
+                    <input defaultValue={entry.units2} type="input" id="units2" onChange={this.handleChange} placeholder="0"></input>
 
                     <label htmlFor="insulinType3">Medication 3</label>
-                    <select value={entry.insulinType3} type="input" id="insulinType3" onChange={this.handleChange}>
+                    <select defaultValue={entry.insulinType3} type="input" id="insulinType3" onChange={this.handleChange}>
                         <option value="" disabled selected>Select the type of insulin</option>
                         {insulinTypes.map((type, i) =>
                             <option value={type} key={i}>{type}</option>
@@ -89,7 +109,7 @@ class EntryDetails extends Component {
                     </select>
                 
                     <label htmlFor="units3">Units</label>
-                    <input value={entry.units3} type="input" id="units3" onChange={this.handleChange} placeholder="0"></input>
+                    <input defaultValue={entry.units3} type="input" id="units3" onChange={this.handleChange} placeholder="0"></input>
 
                     <button type="submit">Submit</button>
                     </form>
@@ -99,12 +119,9 @@ class EntryDetails extends Component {
 }
 
 const mapStateToProps = (state, ownParams) => {
-    console.log(state)
-    console.log(ownParams)
     const id = ownParams.match.params.id
     const entries = state.firestore.data.entries;
     const entry = entries ? entries[id] : null
-    console.log(entry)
     return {
         entry: entry,
         auth: state.firebase.auth
@@ -113,7 +130,7 @@ const mapStateToProps = (state, ownParams) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateEntry: (entry) => dispatch(updateEntry(entry))
+        updateEntry: (entry, uid) => dispatch(updateEntry(entry, uid))
     }
 }
 

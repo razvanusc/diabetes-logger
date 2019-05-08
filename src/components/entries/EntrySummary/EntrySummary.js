@@ -1,7 +1,10 @@
 import React from 'react';
-import './EntrySummary.css'
+import './EntrySummary.css';
+import { removeEntry } from '../../../store/actions/entryActions';
+import { connect } from 'react-redux';
+import moment from 'moment';
 
-const EntrySummary = ({ entry }) => {
+const EntrySummary = (props) => {
     const kMgdlHighLimit = 180.0
     const kMgdlLowLimit = 70.0
 
@@ -13,6 +16,8 @@ const EntrySummary = ({ entry }) => {
 
     // const kMmollMidHighLimit = 8.0
     // const kMmollMidLowLimit = 5.0
+
+    const { entry } = props
 
     let bloodSugarClassName = "card-blood-sugar-summary "
 
@@ -28,24 +33,43 @@ const EntrySummary = ({ entry }) => {
         bloodSugarClassName = bloodSugarClassName + "border-red"
     }
 
+    const handleClick = (entry) => {
+        const id = entry.id
+        props.removeEntry(id)
+    }
     return (
+
         <div className="summary-container">
             <div className="card-summary">
-                <div className={bloodSugarClassName}>
-                    <div>{entry.bloodSugar}</div>
-                    <div>{entry.unit}</div>
-                </div>
-                <div className="card-time-insulin">
-                    <div className="card-time-summary">{entry.timeOfTheDay}</div>
-                    <div className="card-insulin-summary">
-                        <p>{entry.units1} {entry.insulinType1}</p>
-                        <p>{entry.units2} {entry.insulinType2}</p>
-                        <p>{entry.units3} {entry.insulinType3}</p>
+                <a href={'/entry/' + entry.id} >
+                    <div className={bloodSugarClassName}>
+                        <div>{entry.bloodSugar}</div>
+                        <div>{entry.unit}</div>
                     </div>
+                </a>
+                <a href={'/entry/' + entry.id} >
+                    <div className="card-time-insulin">
+                        <div className="card-day-time-summary">{moment(entry.startDate.toDate()).format('LT')}</div>
+                        <div className="card-time-summary">{entry.timeOfTheDay}</div>
+                        <div className="card-insulin-summary">
+                            {entry.units1 && entry.insulinType1 ? <p>{entry.units1} {entry.insulinType1}</p> : null}
+                            {entry.units2 && entry.insulinType2 ? <p>{entry.units2} {entry.insulinType2}</p> : null}
+                            {entry.units3 && entry.insulinType3 ? <p>{entry.units3} {entry.insulinType3}</p> : null}
+                        </div>
+                    </div>
+                </a>
+                <div className='delete-btn'>
+                    <a onClick={() => handleClick(entry)}><i className="fas fa-trash-alt"></i></a>
                 </div>
             </div>
         </div>
     )
 }
 
-export default EntrySummary;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removeEntry: (uid) => dispatch(removeEntry(uid))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(EntrySummary);

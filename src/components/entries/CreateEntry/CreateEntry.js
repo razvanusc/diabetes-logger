@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import './CreateEntry.css';
-import { createEntry} from '../../../store/actions/entryActions';
+import { createEntry } from '../../../store/actions/entryActions';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class CreateEntry extends Component {
     state = {
@@ -13,12 +17,19 @@ class CreateEntry extends Component {
         insulinType2: '',
         units2: null,
         insulinType3: '',
-        units3: ''
+        units3: '', 
+        startDate: new Date()
     }
 
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
+        })
+    }
+
+    handleDate = (date) => {
+        this.setState({
+            startDate: date
         })
     }
 
@@ -32,27 +43,39 @@ class CreateEntry extends Component {
         const { auth } = this.props
         if (!auth.uid) return <Redirect to='/signin' />
 
-        const insulinTypes = [ 'Apidra', 'Humalog', 'Injectables', 'Insulin NPH', 'Lantus', 'Levemir', 'Novolog', 'Acarbose (Precose)', 'Actoplus Met',
-        'Actos', 'Amaryl', 'Diabeta', 'Duetact', 'Fortamet', 'Glucophage', 'Glucophage XR', 'Gluctrol', 'Glucotrol XL',
-        'Glucovance', 'Glumetza', 'Glynase', 'Glyset', 'Janumet', 'Kombiglyze', 'Metaglip', 'Metformin', 'Micronase',
-        'Onglyza', 'Prandimet', 'Prandin', 'Riomet', 'Starlix', 'Tradjenata', 'Welchol'];
+        const insulinTypes = ['Apidra', 'Humalog', 'Injectables', 'Insulin NPH', 'Lantus', 'Levemir', 'Novolog', 'Acarbose (Precose)', 'Actoplus Met',
+            'Actos', 'Amaryl', 'Diabeta', 'Duetact', 'Fortamet', 'Glucophage', 'Glucophage XR', 'Gluctrol', 'Glucotrol XL',
+            'Glucovance', 'Glumetza', 'Glynase', 'Glyset', 'Janumet', 'Kombiglyze', 'Metaglip', 'Metformin', 'Micronase',
+            'Onglyza', 'Prandimet', 'Prandin', 'Riomet', 'Starlix', 'Tradjenata', 'Welchol'];
 
         const timeOfDay = ['Before Breakfast', 'After Breakfast', 'Before Lunch', 'After Lunch', 'Before Dinner', 'After Dinner',
-        'Before Bedtime', 'Random'];
+            'Before Bedtime', 'Random'];
 
         return (
             <div className="create-entry-div">
                 <form className='entry-form' onSubmit={this.handleSubmit}>
                     <label htmlFor="timeOfTheDay">Time of the day</label>
                     <select type="text" id="timeOfTheDay" onChange={this.handleChange}>
-                         <option value="" disabled selected>Select the time of the day</option>
-                         {timeOfDay.map((time, i) =>
-                             <option value={time} key={i}>{time}</option>
+                        <option value="" disabled selected>Select the time of the day</option>
+                        {timeOfDay.map((time, i) =>
+                            <option value={time} key={i}>{time}</option>
                         )}
-                      </select>
+                    </select>
 
                     <label htmlFor="bloodSugar">Blood Sugar</label>
                     <input type="input" id="bloodSugar" onChange={this.handleChange} placeholder="0" />
+
+                    <label htmlFor="dateAndTime">Date and Time</label>
+                    <DatePicker
+                        todayButton={"Today"}
+                        selected={this.state.startDate}
+                        onChange={this.handleDate}
+                        showTimeSelect
+                        timeFormat="HH:mm"
+                        timeIntervals={15}
+                        dateFormat="MMMM d, yyyy h:mm aa"
+                        timeCaption="time"
+                    />
 
                     <label htmlFor="insulinType1">Medication 1</label>
                     <select type="input" id="insulinType1" onChange={this.handleChange}>
@@ -72,7 +95,7 @@ class CreateEntry extends Component {
                             <option value={type} key={i}>{type}</option>
                         )}
                     </select>
-                
+
                     <label htmlFor="units2">Units</label>
                     <input type="input" id="units2" onChange={this.handleChange} placeholder="0"></input>
 
@@ -83,13 +106,13 @@ class CreateEntry extends Component {
                             <option value={type} key={i}>{type}</option>
                         )}
                     </select>
-                
+
                     <label htmlFor="units3">Units</label>
                     <input type="input" id="units3" onChange={this.handleChange} placeholder="0"></input>
 
-                    <button type="submit">Submit</button>
-                    </form>
-             </div>
+                    <button className="submit-button" type="submit">Submit</button>
+                </form>
+            </div>
         )
     }
 }

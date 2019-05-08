@@ -14,6 +14,12 @@ const entryReducer = (state = initState, action) => {
         case 'UPDATE_ENTRY_ERROR':
             console.log('update entry error', action.err)
             return state;
+        case 'REMOVE_ENTRY':
+            console.log('removed entry')
+            return state;
+        case 'REMOVE_ENTRY_ERROR':
+            console.log('updated entry error', action.err)
+            return state;
         default:
             return state;
     }

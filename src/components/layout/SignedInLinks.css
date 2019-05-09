@@ -11,12 +11,21 @@
     font-weight: bold;
     font-size: 18px;
     transition: 200ms;
+}
+
+.link-list-item1 a {
+    text-decoration: none !important;
+    color: black;
+}
+
+.link-list-item1 a:hover {
     color: black;
 }
 
 .link-list-item2 {
     margin-left: 35px;
     margin-right: 80px;
+    margin-top: 10px;
 }
 
 .link-list-item1:hover {

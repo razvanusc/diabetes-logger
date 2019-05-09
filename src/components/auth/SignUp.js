@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { signUp } from '../../store/actions/authActions'
+import { signUp } from '../../store/actions/authActions';
+import './SignUp.css'
 
 class SignUp extends Component {
     state = {
@@ -25,27 +26,27 @@ class SignUp extends Component {
         if (auth.uid) return <Redirect to='/' />
 
         return (
-            <div>
-                <form onSubmit={this.handleSubmit} >
+            <div className='signup-container'>
+                <form className='signup-form' onSubmit={this.handleSubmit} >
                     <h5>Sign Up</h5>
-                    <div>
+                    <div className='input-field'>
+                        <input type="email" id="email" onChange={this.handleChange} className='validate' />
                         <label htmlFor="email">Email</label>
-                        <input type="email" id="email" onChange={this.handleChange} />
                     </div>
-                    <div>
-                        <label htmlFor="password">Email</label>
-                        <input type="password" id="password" onChange={this.handleChange} />
+                    <div className='input-field'>
+                        <input type="password" id="password" onChange={this.handleChange} className='validate' />
+                        <label htmlFor="password">Password</label>
                     </div>
-                    <div>
-                        <label htmlFor="lastName">Last Name</label>
-                        <input type="text" id="lastName" onChange={this.handleChange} />
-                    </div>
-                    <div>
+                    <div className='input-field'>
+                        <input type="text" id="firstName" onChange={this.handleChange} className='validate' />
                         <label htmlFor="firstName">First Name</label>
-                        <input type="text" id="firstName" onChange={this.handleChange} />
+                    </div>
+                    <div className='input-field'>
+                        <input type="text" id="lastName" onChange={this.handleChange} className='validate' />
+                        <label htmlFor="lastName">Last Name</label>
                     </div>
                     <div>
-                        <button>Sign Up</button>
+                        <button className='signup-button'>Sign Up</button>
                         <div>
                             { authError ? <p>{authError}</p> : null }
                         </div>

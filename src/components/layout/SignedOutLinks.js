@@ -7,11 +7,11 @@ const SignedOutLinks = () => {
     return(
         <div className='links-list'>
             <div className='empty-links'>
-                <div className='signedout-links'>Sign up</div>
+                <div className='signedout-links'>Sign up now</div>
                 <div className='signedout-links'>Log In</div>
             </div>
             <div className='links-list-logo'>
-                <Link to='/' className="nav-left"><img src={Logo} alt='logo' /></Link>
+                <Link to='/landing' className="nav-left"><img src={Logo} alt='logo' /></Link>
             </div>
             <div className='links-list-links'>
                 <NavLink to='/signup' className='signedout-links'>Sign Up</NavLink>

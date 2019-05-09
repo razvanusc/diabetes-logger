@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { signIn } from '../../store/actions/authActions';
 import { Redirect } from 'react-router-dom';
-import './SignIn.css'
+import './SignIn.css';
+import 'materialize-css/dist/css/materialize.min.css';
 
 
 class SignIn extends Component {
@@ -27,19 +28,19 @@ class SignIn extends Component {
         if (auth.uid) return <Redirect to='/' />
 
         return (
-            <div className='signin-form'>
-                <form onSubmit={this.handleSubmit} >
+            <div className='signin-container'>
+                <form className='signin-form' onSubmit={this.handleSubmit} >
                     <h5>Sign In</h5>
-                    <div>
+                    <div className='input-field'>
+                        <input type="email" id="email" onChange={this.handleChange} className='validate' />
                         <label htmlFor="email">Email</label>
-                        <input type="email" id="email" onChange={this.handleChange} placeholder="Email" />
+                    </div>
+                    <div className='input-field'>
+                        <input type="password" id="password" onChange={this.handleChange} className='validate' />
+                        <label htmlFor="password">Password</label>
                     </div>
                     <div>
-                        <label htmlFor="password">Email</label>
-                        <input type="password" id="password" onChange={this.handleChange} placeholder="Password" />
-                    </div>
-                    <div>
-                        <button>Log In</button>
+                        <button className='signin-button'>Log In</button>
                         <div>
                             { authError ? <p>{authError}</p> : null }
                         </div>

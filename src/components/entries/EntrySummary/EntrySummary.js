@@ -17,7 +17,7 @@ const EntrySummary = (props) => {
     // const kMmollMidHighLimit = 8.0
     // const kMmollMidLowLimit = 5.0
 
-    const { entry } = props
+    const { entry, arr, i } = props
 
     let bloodSugarClassName = "card-blood-sugar-summary "
 
@@ -37,9 +37,34 @@ const EntrySummary = (props) => {
         const id = entry.id
         props.removeEntry(id)
     }
-    return (
 
+    let date;
+    if (i === 0) {
+        if (moment(entry.startDate.toDate()).format('LL') === moment(new Date()).format('LL')) {
+            date = <div>Today</div>
+        } else {
+            date = <div>{moment(entry.startDate.toDate()).format('LL')}</div>
+        }
+    } else if (i > 0) {
+        let previousItem = arr[i - 1];
+        if (moment(entry.startDate.toDate()).format('LL') !== moment(previousItem.startDate.toDate()).format('LL')) {
+            if (moment(entry.startDate.toDate()).format('LL') === moment(new Date()).format('LL')) {
+                date = <div>Today</div>
+            } else {
+                date = <div>{moment(entry.startDate.toDate()).format('LL')}</div>
+            }
+        } else {
+            date = null
+        }
+    } else {
+        date = null
+    }
+
+    return (
         <div className="summary-container">
+            <div className="card-date">
+                {date}
+            </div>
             <div className="card-summary">
                 <a href={'/entry/' + entry.id} >
                     <div className={bloodSugarClassName}>
@@ -59,7 +84,7 @@ const EntrySummary = (props) => {
                     </div>
                 </a>
                 <div className='delete-btn'>
-                    <a onClick={() => handleClick(entry)}><i className="fas fa-trash-alt"></i></a>
+                    <button onClick={() => handleClick(entry)}><i className="fas fa-trash-alt"></i></button>
                 </div>
             </div>
         </div>

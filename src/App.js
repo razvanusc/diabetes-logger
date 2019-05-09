@@ -6,13 +6,15 @@ import EntryDetails from './components/entries/EntryDetails/EntryDetails';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import CreateEntry from './components/entries/CreateEntry/CreateEntry';
+import Landing from './components/landing/Landing';
  
 function App() {
   return (
     <BrowserRouter>
       <div>
         <Navbar />
-        <Switch>
+        <Switch> 
+          <Route path='/landing' component={Landing} />
           <Route exact path='/' component={Dashboard} />
           <Route path='/entry/:id' component={EntryDetails} />
           <Route path='/signin' component={SignIn} />

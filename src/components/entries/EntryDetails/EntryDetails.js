@@ -38,7 +38,6 @@ class EntryDetails extends Component {
 
     render() {
         const { auth, entry } = this.props
-        console.log(entry)
         if (!auth.uid) return <Redirect to='/signin' />
         if (!entry) {
             return <div />
@@ -57,7 +56,7 @@ class EntryDetails extends Component {
                 <form className='entry-form' onSubmit={this.handleSubmit} updateon="blur">
                     <label htmlFor="timeOfTheDay">Time of the day</label>
                     <select defaultValue={entry.timeOfTheDay} type="text" id="timeOfTheDay" onChange={this.handleChange}>
-                         <option value="" disabled selected>Select the time of the day</option>
+                         <option value="" disabled>Select the time of the day</option>
                          {timeOfDay.map((time, i) =>
                              <option value={time} key={i}>{time}</option>
                         )}
@@ -80,7 +79,7 @@ class EntryDetails extends Component {
 
                     <label htmlFor="insulinType1">Medication 1</label>
                     <select defaultValue={entry.insulinType1} type="input" id="insulinType1" onChange={this.handleChange}>
-                        <option value="" disabled selected>Select the type of insulin</option>
+                        <option value="" disabled>Select the type of insulin</option>
                         {insulinTypes.map((type, i) =>
                             <option value={type} key={i}>{type}</option>
                         )}
@@ -91,7 +90,7 @@ class EntryDetails extends Component {
 
                     <label htmlFor="insulinType2">Medication 2</label>
                     <select defaultValue={entry.insulinType2} type="input" id="insulinType2" onChange={this.handleChange}>
-                        <option value="" disabled selected>Select the type of insulin</option>
+                        <option value="" disabled>Select the type of insulin</option>
                         {insulinTypes.map((type, i) =>
                             <option value={type} key={i}>{type}</option>
                         )}
@@ -102,7 +101,7 @@ class EntryDetails extends Component {
 
                     <label htmlFor="insulinType3">Medication 3</label>
                     <select defaultValue={entry.insulinType3} type="input" id="insulinType3" onChange={this.handleChange}>
-                        <option value="" disabled selected>Select the type of insulin</option>
+                        <option value="" disabled>Select the type of insulin</option>
                         {insulinTypes.map((type, i) =>
                             <option value={type} key={i}>{type}</option>
                         )}

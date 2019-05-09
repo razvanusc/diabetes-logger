@@ -3,10 +3,11 @@ import EntrySummary from '../EntrySummary/EntrySummary';
 import './EntryList.css'
 
 const EntryList = ({ entries }) => {
+
     return (
         <div className="entry-list">
-            {entries && entries.map((entry) =>
-                <EntrySummary entry={entry} className='entry' key={entry.id} />
+            {entries && entries.map((entry, i, arr) =>
+                <EntrySummary entry={entry} i={i} arr={arr} className='entry' key={entry.id} />
             )}
         </div>
 

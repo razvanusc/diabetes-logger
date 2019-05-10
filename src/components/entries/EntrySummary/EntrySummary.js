@@ -60,16 +60,22 @@ const EntrySummary = (props) => {
         date = null
     }
 
+    let cardSummaryClassName = "card-summary "
+
+    if (entry.insulinType3 || entry.units3) {
+        cardSummaryClassName = cardSummaryClassName + "height-for-three"
+    }
+
     return (
         <div className="summary-container">
             <div className="card-date">
                 {date}
             </div>
-            <div className="card-summary">
+            <div className={cardSummaryClassName}>
                 <a href={'/entry/' + entry.id} >
                     <div className={bloodSugarClassName}>
-                        <div>{entry.bloodSugar}</div>
-                        <div>{entry.unit}</div>
+                        <div className='blood-sugar-output'>{entry.bloodSugar}</div>
+                        <div className='unit-output'>{entry.unit}</div>
                     </div>
                 </a>
                 <a href={'/entry/' + entry.id} >

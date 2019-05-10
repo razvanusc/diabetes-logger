@@ -4,9 +4,9 @@ import { createEntry } from '../../../store/actions/entryActions';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
-
+import M from 'materialize-css';
+import 'materialize-css/dist/css/materialize.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 class CreateEntry extends Component {
     state = {
@@ -17,8 +17,15 @@ class CreateEntry extends Component {
         insulinType2: '',
         units2: null,
         insulinType3: '',
-        units3: '', 
+        units3: '',
         startDate: new Date()
+    }
+
+    componentDidMount() {
+        var elems = document.querySelectorAll('select');
+        M.FormSelect.init(elems);
+
+        console.log(elems)
     }
 
     handleChange = (e) => {
@@ -52,65 +59,83 @@ class CreateEntry extends Component {
             'Before Bedtime', 'Random'];
 
         return (
-            <div className="create-entry-div">
+            <div className="create-entry-container">
                 <form className='entry-form' onSubmit={this.handleSubmit}>
-                    <label htmlFor="timeOfTheDay">Time of the day</label>
-                    <select type="text" id="timeOfTheDay" onChange={this.handleChange}>
-                        <option value="" disabled selected>Select the time of the day</option>
-                        {timeOfDay.map((time, i) =>
-                            <option value={time} key={i}>{time}</option>
-                        )}
-                    </select>
-
-                    <label htmlFor="bloodSugar">Blood Sugar</label>
-                    <input type="input" id="bloodSugar" onChange={this.handleChange} placeholder="0" />
-
-                    <label htmlFor="dateAndTime">Date and Time</label>
-                    <DatePicker
-                        todayButton={"Today"}
-                        selected={this.state.startDate}
-                        onChange={this.handleDate}
-                        showTimeSelect
-                        timeFormat="HH:mm"
-                        timeIntervals={15}
-                        dateFormat="MMMM d, yyyy h:mm aa"
-                        timeCaption="time"
-                    />
-
-                    <label htmlFor="insulinType1">Medication 1</label>
-                    <select type="input" id="insulinType1" onChange={this.handleChange}>
-                        <option value="" disabled selected>Select the type of insulin</option>
-                        {insulinTypes.map((type, i) =>
-                            <option value={type} key={i}>{type}</option>
-                        )}
-                    </select>
-
-                    <label htmlFor="units1">Units</label>
-                    <input type="input" id="units1" onChange={this.handleChange} placeholder="0" />
-
-                    <label htmlFor="insulinType2">Medication 2</label>
-                    <select type="input" id="insulinType2" onChange={this.handleChange}>
-                        <option value="" disabled selected>Select the type of insulin</option>
-                        {insulinTypes.map((type, i) =>
-                            <option value={type} key={i}>{type}</option>
-                        )}
-                    </select>
-
-                    <label htmlFor="units2">Units</label>
-                    <input type="input" id="units2" onChange={this.handleChange} placeholder="0"></input>
-
-                    <label htmlFor="insulinType3">Medication 3</label>
-                    <select type="input" id="insulinType3" onChange={this.handleChange}>
-                        <option value="" disabled selected>Select the type of insulin</option>
-                        {insulinTypes.map((type, i) =>
-                            <option value={type} key={i}>{type}</option>
-                        )}
-                    </select>
-
-                    <label htmlFor="units3">Units</label>
-                    <input type="input" id="units3" onChange={this.handleChange} placeholder="0"></input>
-
-                    <button className="submit-button" type="submit">Submit</button>
+                    <h5>New Entry</h5>
+                    <div className='input-field'>
+                        <select id="timeOfTheDay" onChange={this.handleChange}>
+                            <option value="" disabled selected>Select time of the day</option>
+                            {timeOfDay.map((time, i) =>
+                                <option value={time} key={i}>{time}</option>
+                            )}
+                        </select>
+                        <label>Time of the day</label>
+                    </div>
+                    <div className='input-field'>
+                        <input type="text" id="bloodSugar" onChange={this.handleChange} />
+                        <label htmlFor="bloodSugar">Blood Sugar</label>
+                    </div >
+                    <div className='date-picker-container input-field'>
+                        <DatePicker
+                            className="date-picker"
+                            todayButton={"Today"}
+                            selected={this.state.startDate}
+                            onChange={this.handleDate}
+                            showTimeSelect
+                            timeFormat="HH:mm"
+                            timeIntervals={1}
+                            dateFormat="MMMM d, yyyy h:mm aa"
+                            timeCaption="time"
+                        />
+                    </div>
+                    <div className="insulin-with-units-input">
+                        <div className='input-field'>
+                            <select id="insulinType1" onChange={this.handleChange}>
+                                <option value="" disabled selected>Select insulin type</option>
+                                {insulinTypes.map((type, i) =>
+                                    <option value={type} key={i}>{type}</option>
+                                )}
+                            </select>
+                            <label htmlFor="insulinType1">Medication 1</label>
+                        </div>
+                        <div className='input-field units-input'>
+                            <input type="text" id="units1" onChange={this.handleChange} />
+                            <label htmlFor="units1">Units</label>
+                        </div>
+                    </div>
+                    <div className="insulin-with-units-input">
+                        <div className='input-field'>
+                            <select id="insulinType2" onChange={this.handleChange}>
+                                <option value="" disabled selected>Select insulin type</option>
+                                {insulinTypes.map((type, i) =>
+                                    <option value={type} key={i}>{type}</option>
+                                )}
+                            </select>
+                            <label htmlFor="insulinType2">Medication 2</label>
+                        </div>
+                        <div className='input-field units-input'>
+                            <input type="text" id="units2" onChange={this.handleChange} />
+                            <label htmlFor="units2">Units</label>
+                        </div>
+                    </div>
+                    <div className="insulin-with-units-input">
+                        <div className='input-field'>
+                            <select id="insulinType3" onChange={this.handleChange}>
+                                <option value="" disabled selected>Select insulin type</option>
+                                {insulinTypes.map((type, i) =>
+                                    <option value={type} key={i}>{type}</option>
+                                )}
+                            </select>
+                            <label htmlFor="insulinType3">Medication 3</label>
+                        </div>
+                        <div className='input-field units-input'>
+                            <input type="text" id="units3" onChange={this.handleChange} />
+                            <label htmlFor="units3">Units</label>
+                        </div>
+                    </div>
+                    <div>
+                        <button className="entry-button" type="submit">Save</button>
+                    </div>
                 </form>
             </div>
         )

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/actions/authActions';
 import './SignUp.css'
+import 'materialize-css/dist/css/materialize.min.css';
 
 class SignUp extends Component {
     state = {
@@ -45,9 +46,9 @@ class SignUp extends Component {
                         <input type="text" id="lastName" onChange={this.handleChange} className='validate' />
                         <label htmlFor="lastName">Last Name</label>
                     </div>
-                    <div>
+                    <div className='signup-button-error'>
                         <button className='signup-button'>Sign Up</button>
-                        <div>
+                        <div className='signup-error'>
                             { authError ? <p>{authError}</p> : null }
                         </div>
                     </div>

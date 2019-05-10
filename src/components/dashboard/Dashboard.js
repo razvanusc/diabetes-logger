@@ -9,7 +9,7 @@ import './Dashboard.css'
 class Dashboard extends Component {
     render() {
         const { entries, auth } = this.props
-        if (!auth.uid) return <Redirect to='/signin' />
+        if (!auth.uid) return <Redirect to='/landing' />
         
         return (
             <div className="container-dashboard">

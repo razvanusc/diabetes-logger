@@ -21,9 +21,9 @@
     color: black;
     cursor: pointer;
     padding: 0 20px;
-    font-weight: bold;
     font-size: 18px;
     transition: 200ms;
+    text-decoration: none;
 }
 
 .links-list-links .signedout-links:hover {
@@ -41,4 +41,35 @@
 .links-list-logo img {
     width: 100px;
     height: 50px;
+}
+
+.caret {
+    display: none !important;
+}
+
+#dropdown-basic {
+    background-color: white;
+    border: none;
+    box-shadow: none;
+    margin-right: -20px;
+    margin-bottom: 5px;
+}
+
+#dropdown-basic i {
+    color: black
+}
+
+#dropdown-basic:focus {
+    background-color: white;
+    outline: none;
+}
+
+.dropdown-link:active {
+    background-color:#EA3223 !important;
+}
+
+@media only screen and (min-width: 768px) {
+    .links-list-logo {
+        margin-right: 35px;
+    }
 }

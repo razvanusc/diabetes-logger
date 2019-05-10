@@ -40,7 +40,7 @@ class SignIn extends Component {
                         <label htmlFor="password">Password</label>
                     </div>
                     <div>
-                        <button className='signin-button'>Log In</button>
+                        <button className='signin-button'>Sign In</button>
                         <div>
                             { authError ? <p>{authError}</p> : null }
                         </div>

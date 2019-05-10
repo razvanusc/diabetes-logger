@@ -57,3 +57,23 @@
   transition: 200ms;
   color: white;
 }
+
+/* Responsive */
+
+@media only screen and (max-width: 768px) {
+  .banner {
+    height: 95vh;
+
+  }
+
+  .banner h1 {
+    font-size: 45px;
+  }
+
+  .banner p {
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    opacity: 0.9;
+    margin-bottom: 80px;
+  }
+}

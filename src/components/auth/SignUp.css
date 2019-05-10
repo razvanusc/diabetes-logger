@@ -10,6 +10,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 300px;
 }
 
 .signup-form h5 {
@@ -24,6 +25,7 @@
     background-color: #EA3223;
     color: white;
     border-radius: 5px;
+    border: none;
     padding: 4px 15px;
     font-size: 15px;
     transition: 200ms;
@@ -40,4 +42,27 @@
 
 .signup-form .signup-button:focus {
     outline: none;
+}
+
+.signup-button-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-error {
+    margin-top: 20px;
+}
+
+.signup-form .input-field {
+    width: 150%;
+}
+
+/* Responsive */
+
+@media only screen and (max-width: 768px) {
+    .signup-form .input-field {
+        width: 100%;
+    }
 }

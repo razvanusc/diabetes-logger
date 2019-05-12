@@ -11,11 +11,33 @@ import 'materialize-css/dist/css/materialize.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
 
 class EntryDetails extends Component {
-    state = {}
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+    }
 
-    componentDidMount() {
+    componentDidUpdate() {
+        const { entry } = this.props
+        function isEmpty(obj) {
+            for (let key in obj) {
+                if (obj.hasOwnProperty(key))
+                    return false;
+            }
+            return true;
+        }
+
         var elems = document.querySelectorAll('select');
         M.FormSelect.init(elems);
+        M.updateTextFields();
+        var el = document.querySelectorAll('ul.tabs');
+        M.Tabs.init(el);
+
+        if (isEmpty(this.state)) {
+            this.setState({ ...entry })
+        } else {
+            return this.state
+        }
     }
 
     handleChange = (e) => {
@@ -25,7 +47,6 @@ class EntryDetails extends Component {
     }
 
     handleDate = (date) => {
-        console.log(date)
         this.setState({
             startDate: date
         })
@@ -36,7 +57,6 @@ class EntryDetails extends Component {
         const id = this.props.match.params.id
         this.props.updateEntry(this.state, id)
         this.props.history.push('/')
-        console.log(this.state)
     }
 
     render() {
@@ -46,8 +66,6 @@ class EntryDetails extends Component {
             return <div />
         }
 
-        console.log(this.state)
-
         const insulinTypes = ['Apidra', 'Humalog', 'Injectables', 'Insulin NPH', 'Lantus', 'Levemir', 'Novolog', 'Acarbose (Precose)', 'Actoplus Met',
             'Actos', 'Amaryl', 'Diabeta', 'Duetact', 'Fortamet', 'Glucophage', 'Glucophage XR', 'Gluctrol', 'Glucotrol XL',
             'Glucovance', 'Glumetza', 'Glynase', 'Glyset', 'Janumet', 'Kombiglyze', 'Metaglip', 'Metformin', 'Micronase',
@@ -56,9 +74,57 @@ class EntryDetails extends Component {
         const timeOfDay = ['Before Breakfast', 'After Breakfast', 'Before Lunch', 'After Lunch', 'Before Dinner', 'After Dinner',
             'Before Bedtime', 'Random'];
 
+        let type1 = (<div className="insulin-with-units-input">
+            <div className='input-field'>
+                <select defaultValue={entry.insulinType1} id="insulinType1" onChange={this.handleChange}>
+                    <option value="" disabled selected>Select insulin type</option>
+                    {insulinTypes.map((type, i) =>
+                        <option value={type} key={i}>{type}</option>
+                    )}
+                </select>
+                <label htmlFor="insulinType1">Medication 1</label>
+            </div>
+            <div className='input-field units-input'>
+                <input defaultValue={entry.units1} type="text" id="units1" onChange={this.handleChange} />
+                <label htmlFor="units1">Units</label>
+            </div>
+        </div>)
+
+        let type2 = (<div className="insulin-with-units-input">
+            <div className='input-field'>
+                <select defaultValue={entry.insulinType2} id="insulinType2" onChange={this.handleChange}>
+                    <option value="" disabled selected>Select insulin type</option>
+                    {insulinTypes.map((type, i) =>
+                        <option value={type} key={i}>{type}</option>
+                    )}
+                </select>
+                <label htmlFor="insulinType2">Medication 2</label>
+            </div>
+            <div className='input-field units-input'>
+                <input defaultValue={entry.units2} type="text" id="units2" onChange={this.handleChange} />
+                <label htmlFor="units2">Units</label>
+            </div>
+        </div>)
+
+        let type3 = (<div className="insulin-with-units-input">
+            <div className='input-field'>
+                <select defaultValue={entry.insulinType3} id="insulinType3" onChange={this.handleChange}>
+                    <option value="" disabled selected>Select insulin type</option>
+                    {insulinTypes.map((type, i) =>
+                        <option value={type} key={i}>{type}</option>
+                    )}
+                </select>
+                <label htmlFor="insulinType3">Medication 3</label>
+            </div>
+            <div className='input-field units-input'>
+                <input defaultValue={entry.units3} type="text" id="units3" onChange={this.handleChange} />
+                <label htmlFor="units3">Units</label>
+            </div>
+        </div>)
+
         return (
-            <div className="edit-entry-container">
-                <form className='edit-entry-form' onSubmit={this.handleSubmit}>
+            <div className="create-entry-container">
+                <form className='entry-form' onSubmit={this.handleSubmit}>
                     <h5>Edit Entry</h5>
                     <div className='input-field'>
                         <select defaultValue={entry.timeOfTheDay} id="timeOfTheDay" onChange={this.handleChange}>
@@ -86,79 +152,57 @@ class EntryDetails extends Component {
                             timeCaption="time"
                         />
                     </div>
-                    <div className="insulin-with-units-input">
-                        <div className='input-field'>
-                            <select defaultValue={entry.insulinType1} id="insulinType1" onChange={this.handleChange}>
-                                <option value="" disabled selected>Select insulin type</option>
-                                {insulinTypes.map((type, i) =>
-                                    <option value={type} key={i}>{type}</option>
-                                )}
-                            </select>
-                            <label htmlFor="insulinType1">Medication 1</label>
-                        </div>
-                        <div className='input-field units-input'>
-                            <input defaultValue={entry.units1} type="text" id="units1" onChange={this.handleChange} />
-                            <label htmlFor="units1">Units</label>
-                        </div>
+                    <h6>Medication</h6>
+                    <div className="row">
+                        <ul className="tabs">
+                            <li className="tab">
+                                <a className={!entry.insulinType1 && !entry.units1 ? "active" : null} href="#none">None</a>
+                            </li>
+                            <li className="tab">
+                                <a className={entry.insulinType1 && entry.units1 && !entry.insulinType2 && !entry.units2 && !entry.insulinType3 && !entry.units3 ? "active" : null} href="#type1">1 type</a>
+                            </li>
+                            <li className="tab">
+                                <a className={entry.insulinType2 && entry.units2 && !entry.insulinType3 && !entry.units3 ? "active" : null} href="#type2">2 types</a>
+                            </li>
+                            <li className="tab">
+                                <a className={entry.insulinType3 && entry.units3 ? "active" : null} href="#type3">3 types</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div className="insulin-with-units-input">
-                        <div className='input-field'>
-                            <select defaultValue={entry.insulinType2} id="insulinType2" onChange={this.handleChange}>
-                                <option value="" disabled selected>Select insulin type</option>
-                                {insulinTypes.map((type, i) =>
-                                    <option value={type} key={i}>{type}</option>
-                                )}
-                            </select>
-                            <label htmlFor="insulinType2">Medication 2</label>
-                        </div>
-                        <div className='input-field units-input'>
-                            <input defaultValue={entry.units2} type="text" id="units2" onChange={this.handleChange} />
-                            <label htmlFor="units2">Units</label>
-                        </div>
-                    </div>
-                    <div className="insulin-with-units-input">
-                        <div className='input-field'>
-                            <select defaultValue={entry.insulinType3} id="insulinType3" onChange={this.handleChange}>
-                                <option value="" disabled selected>Select insulin type</option>
-                                {insulinTypes.map((type, i) =>
-                                    <option value={type} key={i}>{type}</option>
-                                )}
-                            </select>
-                            <label htmlFor="insulinType3">Medication 3</label>
-                        </div>
-                        <div className='input-field units-input'>
-                            <input defaultValue={entry.units3} type="text" id="units3" onChange={this.handleChange} />
-                            <label htmlFor="units3">Units</label>
-                        </div>
+                    <div className='insulin-types-container'>
+                        <div id="none" className="col s12"></div>
+                        <div id="type1" className="col s12">{type1}</div>
+                        <div id="type2" className="col s12">{type1} {type2}</div>
+                        <div id="type3" className="col s12">{type1} {type2} {type3}</div>
                     </div>
                     <div>
                         <button className="entry-button" type="submit">Save</button>
                     </div>
                 </form>
             </div>
-        )
-    }
-}
-
+                    )
+                }
+            }
+            
 const mapStateToProps = (state, ownParams) => {
     const id = ownParams.match.params.id
-    const entries = state.firestore.data.entries;
-    const entry = entries ? entries[id] : null
+                    const entries = state.firestore.data.entries;
+                    const entry = entries ? entries[id] : null
     return {
-        entry: entry,
-        auth: state.firebase.auth
-    }
-}
-
+                        entry: entry,
+                    auth: state.firebase.auth
+                }
+            }
+            
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateEntry: (entry, uid) => dispatch(updateEntry(entry, uid))
-    }
-}
-
-export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
-    firestoreConnect([
-        { collection: 'entries' }
-    ])
+                        updateEntry: (entry, uid) => dispatch(updateEntry(entry, uid))
+                }
+            }
+            
+            export default compose(
+                connect(mapStateToProps, mapDispatchToProps),
+                firestoreConnect([
+        {collection: 'entries' }
+                ])
 )(EntryDetails);

@@ -69,3 +69,22 @@ ul.dropdown-content.select-dropdown li span {
     opacity: 0.8;
     transition: 200ms;
 }
+
+.insulin-types-container {
+    margin: auto;
+}
+
+.tabs .tab a {
+    text-decoration: none;
+}
+
+.entry-form h6 {
+    font-weight: bold;
+    margin: 15px auto;
+}
+
+@media screen and (max-width: 768px) {
+    .create-entry-container {
+        width: 100%;
+    }
+}

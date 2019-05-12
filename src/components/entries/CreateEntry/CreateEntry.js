@@ -22,10 +22,10 @@ class CreateEntry extends Component {
     }
 
     componentDidMount() {
+        var el = document.querySelectorAll('ul.tabs');
+        M.Tabs.init(el);
         var elems = document.querySelectorAll('select');
         M.FormSelect.init(elems);
-
-        console.log(elems)
     }
 
     handleChange = (e) => {
@@ -58,6 +58,54 @@ class CreateEntry extends Component {
         const timeOfDay = ['Before Breakfast', 'After Breakfast', 'Before Lunch', 'After Lunch', 'Before Dinner', 'After Dinner',
             'Before Bedtime', 'Random'];
 
+        let type1 = (<div className="insulin-with-units-input">
+            <div className='input-field'>
+                <select id="insulinType1" onChange={this.handleChange}>
+                    <option value="" disabled selected>Select insulin type</option>
+                    {insulinTypes.map((type, i) =>
+                        <option value={type} key={i}>{type}</option>
+                    )}
+                </select>
+                <label htmlFor="insulinType1">Medication 1</label>
+            </div>
+            <div className='input-field units-input'>
+                <input type="text" id="units1" onChange={this.handleChange} />
+                <label htmlFor="units1">Units</label>
+            </div>
+        </div>)
+
+        let type2 = (<div className="insulin-with-units-input">
+            <div className='input-field'>
+                <select id="insulinType2" onChange={this.handleChange}>
+                    <option value="" disabled selected>Select insulin type</option>
+                    {insulinTypes.map((type, i) =>
+                        <option value={type} key={i}>{type}</option>
+                    )}
+                </select>
+                <label htmlFor="insulinType2">Medication 2</label>
+            </div>
+            <div className='input-field units-input'>
+                <input type="text" id="units2" onChange={this.handleChange} />
+                <label htmlFor="units2">Units</label>
+            </div>
+        </div>)
+
+        let type3 = (<div className="insulin-with-units-input">
+            <div className='input-field'>
+                <select id="insulinType3" onChange={this.handleChange}>
+                    <option value="" disabled selected>Select insulin type</option>
+                    {insulinTypes.map((type, i) =>
+                        <option value={type} key={i}>{type}</option>
+                    )}
+                </select>
+                <label htmlFor="insulinType3">Medication 3</label>
+            </div>
+            <div className='input-field units-input'>
+                <input type="text" id="units3" onChange={this.handleChange} />
+                <label htmlFor="units3">Units</label>
+            </div>
+        </div>)
+
         return (
             <div className="create-entry-container">
                 <form className='entry-form' onSubmit={this.handleSubmit}>
@@ -88,50 +136,28 @@ class CreateEntry extends Component {
                             timeCaption="time"
                         />
                     </div>
-                    <div className="insulin-with-units-input">
-                        <div className='input-field'>
-                            <select id="insulinType1" onChange={this.handleChange}>
-                                <option value="" disabled selected>Select insulin type</option>
-                                {insulinTypes.map((type, i) =>
-                                    <option value={type} key={i}>{type}</option>
-                                )}
-                            </select>
-                            <label htmlFor="insulinType1">Medication 1</label>
-                        </div>
-                        <div className='input-field units-input'>
-                            <input type="text" id="units1" onChange={this.handleChange} />
-                            <label htmlFor="units1">Units</label>
-                        </div>
+                    <h6>Medication</h6>
+                    <div className="row">
+                        <ul className="tabs">
+                            <li className="tab">
+                                <a className="active" href="#none">None</a>
+                            </li>
+                            <li className="tab">
+                                <a href="#type1">1 type</a>
+                            </li>
+                            <li className="tab">
+                                <a href="#type2">2 types</a>
+                            </li>
+                            <li className="tab">
+                                <a href="#type3">3 types</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div className="insulin-with-units-input">
-                        <div className='input-field'>
-                            <select id="insulinType2" onChange={this.handleChange}>
-                                <option value="" disabled selected>Select insulin type</option>
-                                {insulinTypes.map((type, i) =>
-                                    <option value={type} key={i}>{type}</option>
-                                )}
-                            </select>
-                            <label htmlFor="insulinType2">Medication 2</label>
-                        </div>
-                        <div className='input-field units-input'>
-                            <input type="text" id="units2" onChange={this.handleChange} />
-                            <label htmlFor="units2">Units</label>
-                        </div>
-                    </div>
-                    <div className="insulin-with-units-input">
-                        <div className='input-field'>
-                            <select id="insulinType3" onChange={this.handleChange}>
-                                <option value="" disabled selected>Select insulin type</option>
-                                {insulinTypes.map((type, i) =>
-                                    <option value={type} key={i}>{type}</option>
-                                )}
-                            </select>
-                            <label htmlFor="insulinType3">Medication 3</label>
-                        </div>
-                        <div className='input-field units-input'>
-                            <input type="text" id="units3" onChange={this.handleChange} />
-                            <label htmlFor="units3">Units</label>
-                        </div>
+                    <div className='insulin-types-container'>
+                        <div id="none" className="col s12"></div>
+                        <div id="type1" className="col s12">{type1}</div>
+                        <div id="type2" className="col s12">{type1} {type2}</div>
+                        <div id="type3" className="col s12">{type1} {type2} {type3}</div>
                     </div>
                     <div>
                         <button className="entry-button" type="submit">Save</button>

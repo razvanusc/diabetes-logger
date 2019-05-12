@@ -33,10 +33,10 @@ const mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps),
     firestoreConnect(props => [
-        { 
-            where: [['creatorId', '==', props.auth.uid]],
-            collection: 'entries',
+        {  
+            where: ['creatorId', '==', props.auth.uid],
             orderBy: ['startDate', 'desc'],
+            collection: 'entries',
         }
     ])
 )(Dashboard);

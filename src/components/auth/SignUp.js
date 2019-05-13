@@ -24,7 +24,7 @@ class SignUp extends Component {
 
     render() {
         const { auth, authError } = this.props
-        if (auth.uid) return <Redirect to='/' />
+        if (auth.uid) return <Redirect to='/dashboard' />
 
         return (
             <div className='signup-container'>
@@ -37,14 +37,6 @@ class SignUp extends Component {
                     <div className='input-field'>
                         <input type="password" id="password" onChange={this.handleChange} className='validate' />
                         <label htmlFor="password">Password</label>
-                    </div>
-                    <div className='input-field'>
-                        <input type="text" id="firstName" onChange={this.handleChange} className='validate' />
-                        <label htmlFor="firstName">First Name</label>
-                    </div>
-                    <div className='input-field'>
-                        <input type="text" id="lastName" onChange={this.handleChange} className='validate' />
-                        <label htmlFor="lastName">Last Name</label>
                     </div>
                     <div className='signup-button-error'>
                         <button className='signup-button'>Sign Up</button>

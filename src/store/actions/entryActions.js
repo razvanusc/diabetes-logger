@@ -1,6 +1,5 @@
 export const createEntry = (entry) => {
     return (dispatch, getState, { getFirestore, getFirebase }) => {
-        // make async call to db
         const firestore = getFirestore();
         const creatorId = getState().firebase.auth.uid;
 

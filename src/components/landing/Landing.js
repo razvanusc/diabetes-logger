@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 const Landing = (props) => {
-    if (props.auth.uid) return <Redirect to='/' />
+    if (props.auth.uid) return <Redirect to='/dashboard' />
 
     return (
         <div className="banner">

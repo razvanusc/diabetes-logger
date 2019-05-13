@@ -71,7 +71,7 @@
 }
 
 .card-summary button {
-    z-index: 99;
+    z-index: 98;
 }
 
 .card-summary a {
@@ -86,10 +86,12 @@
 
 .delete-btn button {
     background: none;
+    background-color: white !important;
     color: inherit;
     border: none;
     cursor: pointer;
     outline: inherit;
+    text-decoration: none !important;
 }
 
 .delete-btn i {

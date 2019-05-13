@@ -19,7 +19,7 @@ class SignedOutLinks extends Component {
                     <div className='signedout-links'>Sign In</div>
                 </div>
                 <div className='links-list-logo'>
-                    <Link to='/landing' className="nav-left"><img src={Logo} alt='logo' /></Link>
+                    <Link to='/' className="nav-left"><img src={Logo} alt='logo' /></Link>
                 </div>
                 <div className='links-list-links hidden-xs hidden-sm'>
                     <NavLink to='/signup' className='signedout-links'>Sign Up</NavLink>

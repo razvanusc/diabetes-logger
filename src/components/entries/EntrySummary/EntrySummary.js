@@ -65,8 +65,8 @@ const EntrySummary = (props) => {
     if (entry.insulinType3 || entry.units3) {
         cardSummaryClassName = cardSummaryClassName + "height-for-three"
     }
-    let count = 0
-    console.log(entry, count++)
+    
+    console.log(entry)
 
     return (
         <div className="summary-container">

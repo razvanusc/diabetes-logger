@@ -1,37 +1,37 @@
-.link-list {
+.signedin-links-list {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: inherit;
 }
 
-.link-list-item1 {
+.link-signout {
     cursor: pointer;
     padding: 0 20px;
     font-size: 18px;
     transition: 200ms;
 }
 
-.link-list-item1 a {
+.link-signout a {
     text-decoration: none !important;
     color: black;
 }
 
-.link-list-item1 a:hover {
+.link-signout a:hover {
     color: black;
 }
 
-.link-list-item2 {
+.link-add {
     margin-right: 80px;
     margin-top: 10px;
 }
 
-.link-list-item1:hover {
+.link-signout:hover {
     transition: 200ms;
     opacity: 0.7;
 }
 
-.link-list-item1 a i {
+.link-signout a i {
     font-size: 20px;
 }
 
@@ -45,7 +45,7 @@
     opacity: 0.7;
 }
 
-.link-list img {
+.signedin-links-list img {
     width: 100px;
     height: 50px;
 }
@@ -53,29 +53,28 @@
 /* Responsive */
 
 @media only screen and (max-width: 768px) {
-    .link-list-item1 {
+    .link-signout {
         font-size: 18px;
-        font-weight: lighter;
         padding-right: -10px;
     }
 
-    .link-list-item2 {
+    .link-add {
         font-size: 12px;
         margin-bottom: -12px;
         margin-left: 20px;
     }
 
-    .link-list-item {
+    .link-dashboard{
         margin-right: 25px;
     }
 }
 
 @media only screen and (min-width: 768px) {
-    .link-list-item2 {
+    .link-add {
         margin-left: 20px;
     }
 
-    .link-list-item1 {
+    .link-signout {
         margin-right: 31px;
     }
 }

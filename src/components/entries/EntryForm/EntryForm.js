@@ -38,7 +38,7 @@ const EntryForm = (props) => {
             <label htmlFor="insulinType2">Medication 2</label>
         </div>
         <div className='input-field units-input'>
-            <input defaultValue={props.entry ? props.entry.units2 : null} type="text" id="units2" onChange={props.handleChange} />
+            <input defaultValue={props.entry ? props.entry.units2 : null} type="number" id="units2" onChange={props.handleChange} />
             <label htmlFor="units2">Units</label>
         </div>
     </div>)
@@ -54,13 +54,13 @@ const EntryForm = (props) => {
             <label htmlFor="insulinType3">Medication 3</label>
         </div>
         <div className='input-field units-input'>
-            <input defaultValue={props.entry ? props.entry.units3 : null} type="text" id="units3" onChange={props.handleChange} />
+            <input defaultValue={props.entry ? props.entry.units3 : null} type="number" id="units3" onChange={props.handleChange} />
             <label htmlFor="units3">Units</label>
         </div>
     </div>)
 
     return (
-        <div className="create-entry-container">
+        <div className="entry-form-container">
             <form className='entry-form' onSubmit={props.handleSubmit}>
                 {props.entry ? <h5>Edit entry</h5> : <h5>Create entry</h5>}
                 <div className='input-field'>
@@ -73,7 +73,7 @@ const EntryForm = (props) => {
                     <label>Time of the day</label>
                 </div>
                 <div className='input-field'>
-                    <input required="true" defaultValue={props.entry ? props.entry.bloodSugar : null} type="text" id="bloodSugar" onChange={props.handleChange} />
+                    <input required={true} defaultValue={props.entry ? props.entry.bloodSugar : null} type="number" id="bloodSugar" onChange={props.handleChange} />
                     <label htmlFor="bloodSugar">Blood Sugar</label>
                 </div >
                 <div className='date-picker-container input-field'>

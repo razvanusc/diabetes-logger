@@ -1,7 +1,7 @@
 import React from 'react';
 import './Navbar.css';
-import SignedInLinks from './SignedInLinks';
-import SignedOutLinks from './SignedOutLinks';
+import SignedInLinks from '../SignedInLinks/SignedInLinks';
+import SignedOutLinks from '../SignedOutLinks/SignedOutLinks';
 import { connect } from 'react-redux';
 
 const Navbar = (props) => {

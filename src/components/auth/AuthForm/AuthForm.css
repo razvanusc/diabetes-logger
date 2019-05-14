@@ -1,11 +1,11 @@
-.signup-container{
+.auth-container{
     padding-top: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.signup-form {
+.auth-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,56 +13,65 @@
     width: 300px;
 }
 
-.signup-form h5 {
+.auth-form h5 {
     margin-bottom: 40px;
     font-size: 25px;
     font-weight: bold;
     color: black;
 }
 
-.signup-form .signup-button {
+.auth-form .auth-button {
     margin-top: 40px;
     background-color: #EA3223;
     color: white;
     border-radius: 5px;
     border: none;
-    padding: 4px 15px;
+    padding: 10px 25px;
     font-size: 15px;
     transition: 200ms;
 }
 
-.signup-form .signup-button:hover {
+.auth-form .auth-button:hover {
     opacity: 0.8;
     transition: 200ms;
 }
 
-.signup-form .signup-button:active {
+.auth-form .auth-button:active {
     background-color: #EA3223 !important;
 }
 
-.signup-form .signup-button:focus {
+.auth-form .auth-button:focus {
     outline: none;
 }
 
-.signup-button-error {
+.auth-button-error {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.signup-error {
+.auth-error {
     margin-top: 20px;
 }
 
-.signup-form .input-field {
+.auth-form .input-field {
     width: 150%;
+}
+
+.input-field input:focus+label {
+    color: #EA3223 !important;
+}
+
+.input-field input:focus, .input-field input:active, .input-field input.valid {
+    border-bottom: 1px solid #EA3223 !important;
+    box-shadow: 0 1px 0 0 #EA3223 !important;
 }
 
 /* Responsive */
 
 @media only screen and (max-width: 768px) {
-    .signup-form .input-field {
+    .auth-form .input-field {
         width: 100%;
     }
 }

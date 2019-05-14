@@ -10,10 +10,10 @@ const Landing = (props) => {
     return (
         <div className="banner">
             <div className="banner-content">
-                <h1>Diabetes Logger</h1>
-                <p>Easily track your blood sugar levels and insulin</p>
-                <Link to='/signup' className="banner-button">Sign Up</Link>
-                <Link to='/signin' className="banner-button1">Log In</Link>
+                <h1>Diabetes Logs</h1>
+                <p>Track easily your blood sugar levels and insulin</p>
+                <Link to='/signup' className="banner-button-signup">Sign Up</Link>
+                <Link to='/signin' className="banner-button-login">Log In</Link>
             </div>
         </div>
     )

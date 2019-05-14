@@ -1,6 +1,5 @@
 import React from 'react';
 import EntrySummary from '../EntrySummary/EntrySummary';
-import './EntryList.css'
 
 const EntryList = ({ entries }) => {
     if(!entries) return <div></div>

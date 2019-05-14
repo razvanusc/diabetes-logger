@@ -70,7 +70,7 @@ class EntryDetails extends Component {
                 handleChange={this.handleChange} 
                 handleSubmit={this.handleSubmit} 
                 handleDate={this.handleDate} 
-                startDate={this.state.startDate}
+                entry={entry}
             />
         )
     }

@@ -21,15 +21,15 @@ const EntrySummary = (props) => {
 
     let bloodSugarClassName = "card-blood-sugar-summary "
 
-    if (entry.bloodSugar > kMgdlMidLowLimit && entry.bloodSugar < kMgdlMidHighLimit) {
+    if (entry.bloodSugar >= kMgdlMidLowLimit && entry.bloodSugar < kMgdlMidHighLimit) {
         bloodSugarClassName = bloodSugarClassName + "border-green"
-    } else if (entry.bloodSugar > kMgdlMidHighLimit && entry.bloodSugar < kMgdlHighLimit) {
+    } else if (entry.bloodSugar >= kMgdlMidHighLimit && entry.bloodSugar < kMgdlHighLimit) {
         bloodSugarClassName = bloodSugarClassName + "border-orange"
-    } else if (entry.bloodSugar < kMgdlMidLowLimit && entry.bloodSugar > kMgdlLowLimit) {
+    } else if (entry.bloodSugar < kMgdlMidLowLimit && entry.bloodSugar >= kMgdlLowLimit) {
         bloodSugarClassName = bloodSugarClassName + "border-orange"
     } else if (entry.bloodSugar < kMgdlLowLimit) {
         bloodSugarClassName = bloodSugarClassName + "border-red"
-    } else if (entry.bloodSugar > kMgdlHighLimit) {
+    } else if (entry.bloodSugar >= kMgdlHighLimit) {
         bloodSugarClassName = bloodSugarClassName + "border-red"
     }
 
@@ -65,8 +65,6 @@ const EntrySummary = (props) => {
     if (entry.insulinType3 || entry.units3) {
         cardSummaryClassName = cardSummaryClassName + "height-for-three"
     }
-    
-    console.log(entry)
 
     return (
         <div className="summary-container">

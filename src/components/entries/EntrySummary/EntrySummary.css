@@ -4,6 +4,18 @@
     align-items: center;
 }
 
+.card-date {
+    padding: 10px;
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: -15px;
+}
+
 .card-summary {
     padding: 10px;
     border-bottom: 1px solid rgb(216, 216, 216);
@@ -43,6 +55,16 @@
     border: 2px solid #EB893A;
 }
 
+.blood-sugar-output {
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: -8px;
+}
+
+.unit-output {
+    opacity: 0.4;
+}
+
 .card-time-insulin {
     display: flex;
     flex-direction: column;
@@ -64,10 +86,11 @@
 }
 
 .card-insulin-summary p {
+    font-weight: bold;
     margin-right: 10px;
     border: 1px solid black;
     border-radius: 4px;
-    padding: 2px 12px;
+    padding: 3px 12px;
 }
 
 .card-summary button {
@@ -97,28 +120,6 @@
 .delete-btn i {
     color: black;
     font-size: 20px;
-}
-
-.card-date {
-    padding: 10px;
-    width: 600px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-decoration: none;
-    font-size: 25px;
-    font-weight: bold;
-    margin-bottom: -15px;
-}
-
-.blood-sugar-output {
-    font-weight: bold;
-    font-size: 25px;
-    margin-bottom: -8px;
-}
-
-.unit-output {
-    opacity: 0.4;
 }
 
 @media only screen and (max-width: 768px) {

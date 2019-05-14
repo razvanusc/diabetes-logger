@@ -42,7 +42,7 @@ class CreateEntry extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.createEntry(this.state, this.props.auth.uid)
-            this.props.history.push('/dashboard')
+        this.props.history.push('/dashboard')
     }
 
     render() {

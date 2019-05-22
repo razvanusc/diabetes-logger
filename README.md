@@ -8,6 +8,6 @@ This is a tool created for people with diabetes, allowing them to keep track of 
 
 #### Add Firebase SDK to fbConfig.js file
 
-#### Run npm install
+#### Run 'npm install'
 
-#### Run npm start
+#### Run 'npm start'
